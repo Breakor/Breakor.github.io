@@ -253,7 +253,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://breakor.github.io/2016/09/04/make-some-codes/">
+    <link itemprop="mainEntityOfPage" href="http://breakor.github.io/2016/09/04/ST3kuaijiejian/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="helloSmallCat">
@@ -272,7 +272,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/09/04/make-some-codes/" itemprop="url">sublimeText快捷键操作</a></h1>
+                <a class="post-title-link" href="/2016/09/04/ST3kuaijiejian/" itemprop="url">sublimeText快捷键操作</a></h1>
         
 
         <div class="post-meta">
@@ -369,7 +369,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://breakor.github.io/2014/12/25/ddddddd/">
+    <link itemprop="mainEntityOfPage" href="http://breakor.github.io/2016/05/20/jquery中$.proxy及wrap()的使用/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="helloSmallCat">
@@ -388,7 +388,528 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2014/12/25/ddddddd/" itemprop="url">Hello World</a></h1>
+                <a class="post-title-link" href="/2016/05/20/jquery中$.proxy及wrap()的使用/" itemprop="url">jquery中$.proxy及wrap()的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-20T21:00:26+08:00">
+                2016-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="jquery中-proxy"><a href="#jquery中-proxy" class="headerlink" title="jquery中$.proxy"></a>jquery中$.proxy</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">//正常的this使用</div><div class="line">$(<span class="string">'#breakor'</span>).click(<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line"></div><div class="line">    // 这个this是我们所期望的，当前元素的this.</div><div class="line"></div><div class="line">    $(this).addClass(<span class="string">'aNewClass'</span>);</div><div class="line"></div><div class="line">&#125;);</div><div class="line"></div><div class="line">//并非所期望的this</div><div class="line">$(<span class="string">'#breakor'</span>).click(<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line"></div><div class="line">    <span class="built_in">set</span>Timeout(<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line"></div><div class="line">          // 这个this指向的是settimeout函数内部，而非之前的html元素</div><div class="line"></div><div class="line">        $(this).addClass(<span class="string">'aNewClass'</span>);</div><div class="line"></div><div class="line">    &#125;, 1000);</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>这时候怎么办呢，通常的一种做法是这样的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#breakor'</span>).click(<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">    var that = this;   //设置一个变量，指向这个需要的this</div><div class="line"></div><div class="line">    <span class="built_in">set</span>Timeout(<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line"></div><div class="line">          // 这个this指向的是settimeout函数内部，而非之前的html元素</div><div class="line"></div><div class="line">        $(that).addClass(<span class="string">'aNewClass'</span>);</div><div class="line"></div><div class="line">    &#125;, 1000);</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>但是，在使用了jquery框架的情况下， 有一种更好的方式，就是使用$.proxy函数。</p>
+<p>jQuery.proxy(),接受一个函数，然后返回一个新函数，并且这个新函数始终保持了特定的上下文(context )语境。</p>
+<p>有两种语法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">jQuery.proxy( <span class="keyword">function</span>, context )</div><div class="line">/**<span class="keyword">function</span>将要改变上下文语境的函数。</div><div class="line">** context函数的上下文语境(`this`)会被设置成这个 object 对象。</div><div class="line">**/</div><div class="line"></div><div class="line">jQuery.proxy( context, name )</div><div class="line">/**context函数的上下文语境会被设置成这个 object 对象。</div><div class="line">**name将要改变上下文语境的函数名(这个函数必须是前一个参数 ‘context’ **对象的属性)</div><div class="line">**/</div></pre></td></tr></table></figure></p>
+<p>上面的例子使用这种方式就可以修改成：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#breakor'</span>).click(<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line"></div><div class="line">    <span class="built_in">set</span>Timeout($.proxy(<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line"></div><div class="line">        $(this).addClass(<span class="string">'aNewClass'</span>);  </div><div class="line"></div><div class="line">    &#125;, this), 1000);</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<h3 id="jquery中wrap-方法"><a href="#jquery中wrap-方法" class="headerlink" title="jquery中wrap()方法"></a>jquery中wrap()方法</h3><p>wrap(),顾名思义，就是包裹的意思，就是在你所在器外层包裹一层东西。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;div class=<span class="string">"container"</span>&gt;</div><div class="line">  &lt;div class=<span class="string">"inner"</span>&gt;Hello&lt;/div&gt;</div><div class="line">  &lt;div class=<span class="string">"inner"</span>&gt;Goodbye&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">$( <span class="string">".inner"</span> ).wrap(<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">  <span class="built_in">return</span> <span class="string">"&lt;div class='"</span> + $( this ).text() + <span class="string">"'&gt;&lt;/div&gt;"</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>结果如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&lt;div class=<span class="string">"container"</span>&gt;</div><div class="line">  &lt;div class=<span class="string">"Hello"</span>&gt;</div><div class="line">    &lt;div class=<span class="string">"inner"</span>&gt;Hello&lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">  &lt;div class=<span class="string">"Goodbye"</span>&gt;</div><div class="line">    &lt;div class=<span class="string">"inner"</span>&gt;Goodbye&lt;/div&gt;</div><div class="line">  &lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
+<p>类似的用法还有.wrapAll()、.wrapInner()、.unwrap()等等！</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://breakor.github.io/2016/04/11/百度地图或者高德地图开发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="helloSmallCat">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developed by helloSmallCat">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/04/11/百度地图或者高德地图开发/" itemprop="url">百度地图或者高德地图开发</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-11T19:36:52+08:00">
+                2016-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>案例: <a href="http://lbs.amap.com/api/javascript-api/example/l/1202-2/" target="_blank" rel="external">http://lbs.amap.com/api/javascript-api/example/l/1202-2/</a></p>
+<p>用高德地图周边搜索插件“AMap.PlaceSearch”来完成的。PlaceSearch差价中有用searchNearBy等等，可以通过关键词来搜索到周边的信息。</p>
+<p>代码可以参考如下写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">placeSearch</span></span>() &#123;</div><div class="line">            var MSearch;</div><div class="line">            //加载服务插件，实例化地点查询类 </div><div class="line">            AMap.service([<span class="string">"AMap.PlaceSearch"</span>], <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">                MSearch = new AMap.PlaceSearch(&#123;</div><div class="line">                    city: <span class="string">"北京"</span></div><div class="line">                &#125;);</div><div class="line"></div><div class="line">                MSearch.searchNearBy(<span class="string">"酒店"</span>, cpoint, 500, <span class="keyword">function</span>(status, result)&#123;</div><div class="line">                    <span class="keyword">if</span>(status === <span class="string">'complete'</span> &amp;&amp; result.info === <span class="string">'OK'</span>)&#123;</div><div class="line">                        placeSearch_CallBack(result);</div><div class="line">                    &#125;</div><div class="line">                &#125;);</div><div class="line">            &#125;);</div><div class="line">        &#125;</div></pre></td></tr></table></figure></p>
+<p>百度地图其实也是类似的，demo地址：<a href="http://developer.baidu.com/map/jsdemo.htm#a1_2" target="_blank" rel="external">http://developer.baidu.com/map/jsdemo.htm#a1_2</a></p>
+<p>百度地图应用案例：<a href="http://www.iwjw.com/chuzu/map/" target="_blank" rel="external">http://www.iwjw.com/chuzu/map/</a> </p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://breakor.github.io/2015/12/18/git常用命令总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="helloSmallCat">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developed by helloSmallCat">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/12/18/git常用命令总结/" itemprop="url">git常用命令总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-18T14:02:41+08:00">
+                2015-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><p>复制一个已创建的仓库:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> ssh://breakor@domain.com/blog.git</div></pre></td></tr></table></figure></p>
+<p>创建一个新的本地仓库:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git init</div></pre></td></tr></table></figure></p>
+<h3 id="本地修改"><a href="#本地修改" class="headerlink" title="本地修改"></a>本地修改</h3><p>显示工作路径下已修改的文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git status</div></pre></td></tr></table></figure></p>
+<p>显示与上次提交版本文件的不同：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git diff</div></pre></td></tr></table></figure></p>
+<p>把当前所有修改添加到下次提交中：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git add</div></pre></td></tr></table></figure></p>
+<p>把对某个文件的修改添加到下次提交中：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git add -p &lt;file&gt;</div></pre></td></tr></table></figure></p>
+<p>提交本地的所有修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit <span class="_">-a</span></div></pre></td></tr></table></figure></p>
+<p>提交之前已标记的变化：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit</div></pre></td></tr></table></figure></p>
+<p>附加消息提交：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit -m <span class="string">'message here'</span></div></pre></td></tr></table></figure></p>
+<p>提交，并将提交时间设置为之前的某个日期:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git commit --date=<span class="string">"`date --date='n day ago'`"</span> -am <span class="string">"Commit Message"</span></div></pre></td></tr></table></figure></p>
+<p>修改上次提交：请勿修改已发布的提交记录!<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit --amend</div></pre></td></tr></table></figure></p>
+<p>把当前分支中未提交的修改移动到其他分支<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git stash</div><div class="line">git checkout branch2</div><div class="line">git stash pop</div></pre></td></tr></table></figure></p>
+<h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><p>从当前目录的所有文件中查找文本内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git grep <span class="string">"Hello"</span></div></pre></td></tr></table></figure></p>
+<p>在某一版本中搜索文本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git grep <span class="string">"Hello"</span> v2.5</div></pre></td></tr></table></figure></p>
+<h3 id="提交历史"><a href="#提交历史" class="headerlink" title="提交历史"></a>提交历史</h3><p>从最新提交开始，显示所有的提交记录（显示hash， 作者信息，提交的标题和时间）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">log</span></div></pre></td></tr></table></figure></p>
+<p>显示所有提交（仅显示提交的hash和message）：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">log</span> --oneline</div></pre></td></tr></table></figure></p>
+<p>显示某个用户的所有提交：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">log</span> --author=<span class="string">"username"</span></div></pre></td></tr></table></figure></p>
+<p>显示某个文件的所有修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">log</span> -p &lt;file&gt;</div></pre></td></tr></table></figure></p>
+<p>谁，在什么时间，修改了文件的什么内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git blame &lt;file&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="分支与标签"><a href="#分支与标签" class="headerlink" title="分支与标签"></a>分支与标签</h3><p>列出所有的分支：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch</div></pre></td></tr></table></figure></p>
+<p>切换分支：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout &lt;branch&gt;</div></pre></td></tr></table></figure></p>
+<p>创建并切换到新分支:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout -b &lt;branch&gt;</div></pre></td></tr></table></figure></p>
+<p>基于当前分支创建新分支：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch &lt;new-branch&gt;</div></pre></td></tr></table></figure></p>
+<p>基于远程分支创建新的可追溯的分支：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch --track &lt;new-branch&gt; &lt;remote-branch&gt;</div></pre></td></tr></table></figure></p>
+<p>删除本地分支:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git branch <span class="_">-d</span> &lt;branch&gt;</div></pre></td></tr></table></figure></p>
+<p>给当前版本打标签：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git tag &lt;tag-name&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="更新与发布"><a href="#更新与发布" class="headerlink" title="更新与发布"></a>更新与发布</h3><p>列出当前配置的远程端：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote -v</div></pre></td></tr></table></figure></p>
+<p>显示远程端的信息：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote show &lt;remote&gt;</div></pre></td></tr></table></figure></p>
+<p>添加新的远程端：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote add &lt;remote&gt; &lt;url&gt;</div></pre></td></tr></table></figure></p>
+<p>下载远程端版本，但不合并到HEAD中：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git fetch &lt;remote&gt;</div></pre></td></tr></table></figure></p>
+<p>下载远程端版本，并自动与HEAD版本合并：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git remote pull &lt;remote&gt; &lt;url&gt;</div></pre></td></tr></table></figure></p>
+<p>将远程端版本合并到本地版本中：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git pull origin master</div></pre></td></tr></table></figure></p>
+<p>将本地版本发布到远程端：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push remote &lt;remote&gt; &lt;branch&gt;</div></pre></td></tr></table></figure></p>
+<p>删除远程端分支：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git push &lt;remote&gt; :&lt;branch&gt; (since Git v1.5.0)</div><div class="line">或</div><div class="line">git push &lt;remote&gt; --delete &lt;branch&gt; (since Git v1.7.0)</div></pre></td></tr></table></figure></p>
+<p>发布标签:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push --tags</div></pre></td></tr></table></figure></p>
+<h3 id="合并与重置"><a href="#合并与重置" class="headerlink" title="合并与重置"></a>合并与重置</h3><p>将分支合并到当前HEAD中：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git merge &lt;branch&gt;</div></pre></td></tr></table></figure></p>
+<p>将当前HEAD版本重置到分支中:请勿重置已发布的提交!<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git rebase &lt;branch&gt;</div></pre></td></tr></table></figure></p>
+<p>退出重置:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git rebase --abort</div></pre></td></tr></table></figure></p>
+<p>解决冲突后继续重置：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git rebase --continue</div></pre></td></tr></table></figure></p>
+<p>使用配置好的merge tool 解决冲突：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git mergetool</div></pre></td></tr></table></figure></p>
+<p>在编辑器中手动解决冲突后，标记文件为已解决冲突<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ git add &lt;resolved-file&gt;</div><div class="line"></div><div class="line">$ git rm &lt;resolved-file&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h3><p>放弃工作目录下的所有修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reset --hard HEAD</div></pre></td></tr></table></figure></p>
+<p>移除缓存区的所有文件（i.e. 撤销上次git add）:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reset HEAD</div></pre></td></tr></table></figure></p>
+<p>放弃某个文件的所有本地修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git checkout HEAD &lt;file&gt;</div></pre></td></tr></table></figure></p>
+<p>重置一个提交（通过创建一个截然不同的新提交）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git revert &lt;commit&gt;</div></pre></td></tr></table></figure></p>
+<p>将HEAD重置到指定的版本，并抛弃该版本之后的所有修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reset --hard &lt;commit&gt;</div></pre></td></tr></table></figure></p>
+<p>将HEAD重置到上一次提交的版本，并将之后的修改标记为未添加到缓存区的修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reset &lt;commit&gt;</div></pre></td></tr></table></figure></p>
+<p>将HEAD重置到上一次提交的版本，并保留未提交的本地修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git reset --keep &lt;commit&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="git-submodule的使用"><a href="#git-submodule的使用" class="headerlink" title="git submodule的使用"></a>git submodule的使用</h3><p>开发过程中，经常会有一些通用的部分希望抽取出来做成一个公共库来提供给别的工程来使用，这样就用到了git的git submodule命令。<br>添加</p>
+<p>为当前工程添加submodule，命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git submodule add 仓库地址 路径</div></pre></td></tr></table></figure></p>
+<p>例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git submodule add helloworld.git</div><div class="line">git commit -m <span class="string">"Add submodules helloworld.git</span></div></pre></td></tr></table></figure></p>
+<p>其他人协同<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> /path/to/repos/helloworld_parent.git</div><div class="line">git submodule init</div><div class="line">git submodule update</div></pre></td></tr></table></figure></p>
+<h3 id="移除"><a href="#移除" class="headerlink" title="移除"></a>移除</h3><pre><code>1.删除git cache和物理文件夹
+
+2.删除.gitmodules的内容（或者整个文件） 因为本例只有两个子模块，直接删除文件
+
+3.删除.git/config的submodule配置 源文件
+
+4.提交更改
+</code></pre><h3 id="github中fork了别人的项目，时时更新原项目代码"><a href="#github中fork了别人的项目，时时更新原项目代码" class="headerlink" title="github中fork了别人的项目，时时更新原项目代码"></a>github中fork了别人的项目，时时更新原项目代码</h3><p>1、首先新建一个远程分支haorooms（名字可以随便取）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add breakor git@github.com:confidence68/loupan_select.git</div></pre></td></tr></table></figure></p>
+<p>2、然后fetch下breakor的代码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git fetch breakor</div></pre></td></tr></table></figure></p>
+<p>3、最后就可以把breakor上的代码合并到你自己的分支上了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git merge breakor/master</div></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://breakor.github.io/2015/05/02/shangdimoshi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="helloSmallCat">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developed by helloSmallCat">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/05/02/shangdimoshi/" itemprop="url">windows上帝模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-02T20:10:32+08:00">
+                2015-05-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">回收站.&#123;645ff040-5081-101b-9f08-00aa002f954e&#125; </div><div class="line">拨号网络.&#123;992CFFA0-F557-101A-88EC-00DD010CCC48&#125; </div><div class="line">打印机.&#123;2227a280-3aea-1069<span class="_">-a</span>2de-08002b30309d&#125; </div><div class="line">控制面板.&#123;21ec2020-3aea-1069<span class="_">-a</span>2dd-08002b30309d&#125; </div><div class="line">网上邻居.&#123;208D2C60-3AEA-1069-A2D7-08002B30309D&#125;</div><div class="line">图标clsid=windowsmedia 文件名.&#123;00020c01-0000-0000-c000-000000000046&#125; </div><div class="line">无关联文件 文件名.&#123;00021401-0000-0000-c000-000000000046&#125; </div><div class="line">BMP文件 文件名.&#123;d3e34b21-9d75-101a-8c3d-00aa001a1652&#125; </div><div class="line">HTML文件 文件名.&#123;25336920-03f9-11cf-8fd0-00aa00686f13&#125; </div><div class="line">媒体剪辑文件 文件名.&#123;00022601-0000-0000-c000-000000000046&#125; </div><div class="line">打印机 文件名.&#123;2227a280-3aea-1069-A2de-08002b30309d&#125; </div><div class="line">控制面板 文件名.&#123;21ec2020-3aea-1069-A2dd-08002b30309d&#125; </div><div class="line">网上邻居 文件名.&#123;208d2c60-3aea-1069-A2d7-08002b30309d&#125; </div><div class="line">拨号网络 文件名.&#123;992cffa0-F557-101a-88ec-00dd010ccc48&#125; </div><div class="line">计划任务 文件名.&#123;D6277990-4c6a-11cf-8d87-00aa0060f5bf&#125; </div><div class="line">回收站 文件名.&#123;645ff040-5081-101b-9f08-00aa002f954e&#125; </div><div class="line">Web文件夹 文件名.&#123;Bdeadf00-C265-11d0-Bced-00a0c90ab50f&#125; </div><div class="line">历史记录 文件名.&#123;Ff393560-C2a7-11cf-Bff4-444553540000&#125; </div><div class="line">收藏夹 文件名.&#123;1a9ba3a0-143a-11cf-8350-444553540000&#125; </div><div class="line">预订文件夹 文件名.&#123;F5175861-2688-11d0-9c5e-00aa00a45957&#125; </div><div class="line">ActiveX高速缓存文件夹文件名.&#123;88c6c381-2e85-11d0-94de-444553540000&#125; </div><div class="line">excel.&#123;00020810-0000-0000-C000-000000000046&#125; </div><div class="line">word.&#123;00020900-0000-0000-C000-000000000046&#125; </div><div class="line">media.&#123;00022603-0000-0000-C000-000000000046&#125; </div><div class="line">CAB.&#123;0CD7A5C0-9F37-11CE-AE65-08002B2E1262&#125; </div><div class="line">搜索-计算机.&#123;1f4de370<span class="_">-d</span>627-11d1-ba4f-00a0c91eedba&#125; </div><div class="line">mht.&#123;3050F3D9-98B5-11CF-BB82-00AA00BDCE0B&#125; </div><div class="line">mshta.&#123;3050f4d8-98B5-11CF-BB82-00AA00BDCE0B&#125; </div><div class="line">我的文档.&#123;450D8FBA-AD25-11D0-98A8-0800361B1103&#125; </div><div class="line">XML.&#123;48123bc4-99d9-11d1<span class="_">-a</span>6b3-00c04fd91555&#125; </div><div class="line">回收站(满).&#123;5ef4af3a<span class="_">-f</span>726-11d0-b8a2-00c04<span class="built_in">fc</span>309a4&#125; </div><div class="line">回收站.&#123;645FF040-5081-101B-9F08-00AA002F954E&#125; </div><div class="line">ftp_folder.&#123;63da6ec0-2e98-11cf-8d82-444553540000&#125; </div><div class="line">网络和拨号连接.&#123;7007ACC7-3202-11D1-AAD2-00805FC1270E&#125; </div><div class="line">写字板文档.&#123;73FDDC80-AEA9-101A-98A7-00AA00374959&#125; </div><div class="line">Temporary Offline Files Cleaner.&#123;750fdf0f-2a26-11d1<span class="_">-a</span>3ea-080036587f03&#125; </div><div class="line">用户和密码.&#123;7A9D77BD-5403-11d2-8785-2E0420524153&#125; </div><div class="line">Internet 临时文件.&#123;7BD29E00-76C1-11CF-9DD0-00A0C9034933&#125; </div><div class="line">已下载的程序文件的清除程序.&#123;8369AB20-56C9-11D0-94E8-00AA0059CE02&#125; </div><div class="line">公文包.&#123;85BBD920-42A0-1069-A2E4-08002B30309D&#125; </div><div class="line">ActiveX 高速缓存文件夹.&#123;88C6C381-2E85-11D0-94DE-444553540000&#125; </div><div class="line">mail.&#123;9E56BE60-C50F-11CF-9A2C-00A0C90A90CE&#125; </div><div class="line">历史记录.&#123;FF393560-C2A7-11CF-BFF4-444553540000&#125; </div><div class="line">目录.&#123;fe1290f0-cfbd-11cf<span class="_">-a</span>330-00aa00c16e65&#125; </div><div class="line">Internet Explorer.&#123;FBF23B42-E3F0-101B-8488-00AA003E56F8&#125; </div><div class="line">Snapshot File.&#123;FACB5ED2-7F99-11D0-ADE2-00A0C90DC8D9&#125; </div><div class="line">预订文件夹.&#123;F5175861-2688-11d0-9C5E-00AA00A45957&#125; </div><div class="line">MyDocs Drop Target.&#123;ECF03A32-103D-11d2-854D-006008059367&#125; </div><div class="line">Policy Package.&#123;ecabaebd-7f19-11d2-978E-0000f8757e2a&#125; </div><div class="line">搜索结果.&#123;e17d4<span class="built_in">fc</span>0-5564-11d1-83f2-00a0c90dc849&#125; </div><div class="line">添加网上邻居.&#123;D4480A50-BA28-11d1-8E75-00C04FA31A86&#125; </div><div class="line">Paint.&#123;D3E34B21-9D75-101A-8C3D-00AA001A1652&#125; </div><div class="line">管理工具.&#123;D20EA4E1-3957-11d2-A40B-0C5020524153&#125; </div><div class="line">字体.&#123;D20EA4E1-3957-11d2-A40B-0C5020524152&#125; </div><div class="line">Web Folders.&#123;BDEADF00-C265-11d0-BCED-00A0C90AB50F&#125; </div><div class="line">DocFind Command.&#123;B005E690-678D-11d1-B758-00A0C90564FE&#125; </div><div class="line">脱机文件夹.&#123;AFDB1F70-2A4C-11d2-9039-00C04F8EEB3E&#125;</div></pre></td></tr></table></figure>
+<div align="right">– 本人<a href="https://twitter.com/i_fucked_u/" target="_blank" rel="external">twitter</a>，欢迎交流.</div>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://breakor.github.io/2014/12/25/hello-world - 副本 (12)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="helloSmallCat">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developed by helloSmallCat">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/12/25/hello-world - 副本 (12)/" itemprop="url">Hello World</a></h1>
         
 
         <div class="post-meta">
@@ -437,7 +958,679 @@
       
         
           
-            <p>Welcome to <a href="https://twitter.com/i_fucked_u" target="_blank" rel="external">把猫叫醒</a>! This is my very first post. If you get any problems when using watching this blog, you can send an email to me./<em>hello.</em>/</p>
+            <p>Welcome to <a href="https://twitter.com/i_fucked_u" target="_blank" rel="external">把猫叫醒</a>! This is my very first post. If you get any problems when watching this blog, you can send an email to me./<em>hello.</em>/</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://breakor.github.io/2014/12/25/hello-world - 副本/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="helloSmallCat">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developed by helloSmallCat">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/12/25/hello-world - 副本/" itemprop="url">Hello World</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-25T00:06:32+08:00">
+                2014-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Welcome to <a href="https://twitter.com/i_fucked_u" target="_blank" rel="external">把猫叫醒</a>! This is my very first post. If you get any problems when watching this blog, you can send an email to me./<em>hello.</em>/</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://breakor.github.io/2014/12/25/hello-world - 副本 (13)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="helloSmallCat">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developed by helloSmallCat">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/12/25/hello-world - 副本 (13)/" itemprop="url">Hello World</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-25T00:06:32+08:00">
+                2014-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Welcome to <a href="https://twitter.com/i_fucked_u" target="_blank" rel="external">把猫叫醒</a>! This is my very first post. If you get any problems when watching this blog, you can send an email to me./<em>hello.</em>/</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://breakor.github.io/2014/12/25/hello-world - 副本 (9)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="helloSmallCat">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developed by helloSmallCat">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/12/25/hello-world - 副本 (9)/" itemprop="url">Hello World</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-25T00:06:32+08:00">
+                2014-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Welcome to <a href="https://twitter.com/i_fucked_u" target="_blank" rel="external">把猫叫醒</a>! This is my very first post. If you get any problems when watching this blog, you can send an email to me./<em>hello.</em>/</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://breakor.github.io/2014/12/25/hello-world - 副本 (8)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="helloSmallCat">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developed by helloSmallCat">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/12/25/hello-world - 副本 (8)/" itemprop="url">Hello World</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-25T00:06:32+08:00">
+                2014-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Welcome to <a href="https://twitter.com/i_fucked_u" target="_blank" rel="external">把猫叫醒</a>! This is my very first post. If you get any problems when watching this blog, you can send an email to me./<em>hello.</em>/</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://breakor.github.io/2014/12/25/hello-world - 副本 (6)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="helloSmallCat">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developed by helloSmallCat">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/12/25/hello-world - 副本 (6)/" itemprop="url">Hello World</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-25T00:06:32+08:00">
+                2014-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Welcome to <a href="https://twitter.com/i_fucked_u" target="_blank" rel="external">把猫叫醒</a>! This is my very first post. If you get any problems when watching this blog, you can send an email to me./<em>hello.</em>/</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://breakor.github.io/2014/12/25/hello-world - 副本 (7)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="helloSmallCat">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developed by helloSmallCat">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/12/25/hello-world - 副本 (7)/" itemprop="url">Hello World</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-12-25T00:06:32+08:00">
+                2014-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Welcome to <a href="https://twitter.com/i_fucked_u" target="_blank" rel="external">把猫叫醒</a>! This is my very first post. If you get any problems when watching this blog, you can send an email to me./<em>hello.</em>/</p>
 
           
         
@@ -475,6 +1668,10 @@
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -517,7 +1714,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
