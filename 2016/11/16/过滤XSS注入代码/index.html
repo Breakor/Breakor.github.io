@@ -1,0 +1,663 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="有的input中会提交一些javascript或者html,会给网站造成一定的危害。为此，防止XSS注入的任务交给了后端，后端防止XSS注入函数如下：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253function RemoveXSS($val) &amp;#1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="防止XSS注入">
+<meta property="og:url" content="http://breakor.github.io/2016/11/16/过滤XSS注入代码/index.html">
+<meta property="og:site_name" content="Developed by helloSmallCat">
+<meta property="og:description" content="有的input中会提交一些javascript或者html,会给网站造成一定的危害。为此，防止XSS注入的任务交给了后端，后端防止XSS注入函数如下：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253function RemoveXSS($val) &amp;#1">
+<meta property="og:updated_time" content="2017-05-12T05:38:40.905Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="防止XSS注入">
+<meta name="twitter:description" content="有的input中会提交一些javascript或者html,会给网站造成一定的危害。为此，防止XSS注入的任务交给了后端，后端防止XSS注入函数如下：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253function RemoveXSS($val) &amp;#1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://breakor.github.io/2016/11/16/过滤XSS注入代码/"/>
+
+
+
+
+
+  <title>防止XSS注入 | Developed by helloSmallCat</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Developed by helloSmallCat</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Web development</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://breakor.github.io/2016/11/16/过滤XSS注入代码/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="helloSmallCat">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Developed by helloSmallCat">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">防止XSS注入</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-16T18:37:08+08:00">
+                2016-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>有的input中会提交一些javascript或者html,会给网站造成一定的危害。为此，防止XSS注入的任务交给了后端，后端防止XSS注入函数如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> RemoveXSS(<span class="variable">$val</span>) &#123; </div><div class="line">   // remove all non-printable characters. CR(0a) and LF(0b) and TAB(9) are allowed </div><div class="line">   // this prevents some character re-spacing such as &lt;java\0script&gt; </div><div class="line">   // note that you have to handle splits with \n, \r, and \t later since they *are* allowed <span class="keyword">in</span> some inputs </div><div class="line">   <span class="variable">$val</span> = preg_replace(<span class="string">'/([\x00-\x08,\x0b-\x0c,\x0e-\x19])/'</span>, <span class="string">''</span>, <span class="variable">$val</span>); </div><div class="line"></div><div class="line">   // straight replacements, the user should never need these since they<span class="string">'re normal characters </span></div><div class="line">   // this prevents like &lt;IMG SRC=@avascript:alert('XSS<span class="string">')&gt; </span></div><div class="line">   $search = 'abcdefghijklmnopqrstuvwxyz<span class="string">';</span></div><div class="line">   $search .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ<span class="string">'; </span></div><div class="line">   $search .= '1234567890!@<span class="comment">#$%^&amp;*()';</span></div><div class="line">   <span class="variable">$search</span> .= <span class="string">'~`";:?+/=&#123;&#125;[]-_|\'</span>\\<span class="string">';</span></div><div class="line">   for ($i = 0; $i &lt; strlen($search); $i++) &#123;</div><div class="line">      // ;? matches the ;, which is optional</div><div class="line">      // 0&#123;0,7&#125; matches any padded zeros, which are optional and go up to 8 chars</div><div class="line"></div><div class="line">      // @ @ search for the hex values</div><div class="line">      $val = preg_replace('/(&amp;<span class="comment">#[xX]0&#123;0,8&#125;'.dechex(ord($search[$i])).';?)/i', $search[$i], $val); // with a ;</span></div><div class="line">      // @ @ 0&#123;0,7&#125; matches <span class="string">'0'</span> zero to seven <span class="built_in">times</span> </div><div class="line">      <span class="variable">$val</span> = preg_replace(<span class="string">'/(�&#123;0,8&#125;'</span>.ord(<span class="variable">$search</span>[<span class="variable">$i</span>]).<span class="string">';?)/'</span>, <span class="variable">$search</span>[<span class="variable">$i</span>], <span class="variable">$val</span>); // with a ;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   // now the only remaining whitespace attacks are \t, \n, and \r</div><div class="line">   <span class="variable">$ra1</span> = Array(<span class="string">'javascript'</span>, <span class="string">'vbscript'</span>, <span class="string">'expression'</span>, <span class="string">'applet'</span>, <span class="string">'meta'</span>, <span class="string">'xml'</span>, <span class="string">'blink'</span>, <span class="string">'link'</span>, <span class="string">'style'</span>, <span class="string">'script'</span>, <span class="string">'embed'</span>, <span class="string">'object'</span>, <span class="string">'iframe'</span>, <span class="string">'frame'</span>, <span class="string">'frameset'</span>, <span class="string">'ilayer'</span>, <span class="string">'layer'</span>, <span class="string">'bgsound'</span>, <span class="string">'title'</span>, <span class="string">'base'</span>);</div><div class="line">   <span class="variable">$ra2</span> = Array(<span class="string">'onabort'</span>, <span class="string">'onactivate'</span>, <span class="string">'onafterprint'</span>, <span class="string">'onafterupdate'</span>, <span class="string">'onbeforeactivate'</span>, <span class="string">'onbeforecopy'</span>, <span class="string">'onbeforecut'</span>, <span class="string">'onbeforedeactivate'</span>, <span class="string">'onbeforeeditfocus'</span>, <span class="string">'onbeforepaste'</span>, <span class="string">'onbeforeprint'</span>, <span class="string">'onbeforeunload'</span>, <span class="string">'onbeforeupdate'</span>, <span class="string">'onblur'</span>, <span class="string">'onbounce'</span>, <span class="string">'oncellchange'</span>, <span class="string">'onchange'</span>, <span class="string">'onclick'</span>, <span class="string">'oncontextmenu'</span>, <span class="string">'oncontrolselect'</span>, <span class="string">'oncopy'</span>, <span class="string">'oncut'</span>, <span class="string">'ondataavailable'</span>, <span class="string">'ondatasetchanged'</span>, <span class="string">'ondatasetcomplete'</span>, <span class="string">'ondblclick'</span>, <span class="string">'ondeactivate'</span>, <span class="string">'ondrag'</span>, <span class="string">'ondragend'</span>, <span class="string">'ondragenter'</span>, <span class="string">'ondragleave'</span>, <span class="string">'ondragover'</span>, <span class="string">'ondragstart'</span>, <span class="string">'ondrop'</span>, <span class="string">'onerror'</span>, <span class="string">'onerrorupdate'</span>, <span class="string">'onfilterchange'</span>, <span class="string">'onfinish'</span>, <span class="string">'onfocus'</span>, <span class="string">'onfocusin'</span>, <span class="string">'onfocusout'</span>, <span class="string">'onhelp'</span>, <span class="string">'onkeydown'</span>, <span class="string">'onkeypress'</span>, <span class="string">'onkeyup'</span>, <span class="string">'onlayoutcomplete'</span>, <span class="string">'onload'</span>, <span class="string">'onlosecapture'</span>, <span class="string">'onmousedown'</span>, <span class="string">'onmouseenter'</span>, <span class="string">'onmouseleave'</span>, <span class="string">'onmousemove'</span>, <span class="string">'onmouseout'</span>, <span class="string">'onmouseover'</span>, <span class="string">'onmouseup'</span>, <span class="string">'onmousewheel'</span>, <span class="string">'onmove'</span>, <span class="string">'onmoveend'</span>, <span class="string">'onmovestart'</span>, <span class="string">'onpaste'</span>, <span class="string">'onpropertychange'</span>, <span class="string">'onreadystatechange'</span>, <span class="string">'onreset'</span>, <span class="string">'onresize'</span>, <span class="string">'onresizeend'</span>, <span class="string">'onresizestart'</span>, <span class="string">'onrowenter'</span>, <span class="string">'onrowexit'</span>, <span class="string">'onrowsdelete'</span>, <span class="string">'onrowsinserted'</span>, <span class="string">'onscroll'</span>, <span class="string">'onselect'</span>, <span class="string">'onselectionchange'</span>, <span class="string">'onselectstart'</span>, <span class="string">'onstart'</span>, <span class="string">'onstop'</span>, <span class="string">'onsubmit'</span>, <span class="string">'onunload'</span>);</div><div class="line">   <span class="variable">$ra</span> = array_merge(<span class="variable">$ra1</span>, <span class="variable">$ra2</span>);</div><div class="line"></div><div class="line">   <span class="variable">$found</span> = <span class="literal">true</span>; // keep replacing as long as the previous round replaced something</div><div class="line">   <span class="keyword">while</span> (<span class="variable">$found</span> == <span class="literal">true</span>) &#123;</div><div class="line">      <span class="variable">$val_before</span> = <span class="variable">$val</span>;</div><div class="line">      <span class="keyword">for</span> (<span class="variable">$i</span> = 0; <span class="variable">$i</span> &lt; sizeof(<span class="variable">$ra</span>); <span class="variable">$i</span>++) &#123;</div><div class="line">         <span class="variable">$pattern</span> = <span class="string">'/'</span>;</div><div class="line">         <span class="keyword">for</span> (<span class="variable">$j</span> = 0; <span class="variable">$j</span> &lt; strlen(<span class="variable">$ra</span>[<span class="variable">$i</span>]); <span class="variable">$j</span>++) &#123;</div><div class="line">            <span class="keyword">if</span> (<span class="variable">$j</span> &gt; 0) &#123;</div><div class="line">               <span class="variable">$pattern</span> .= <span class="string">'('</span>; </div><div class="line">               <span class="variable">$pattern</span> .= <span class="string">'(&amp;#[xX]0&#123;0,8&#125;([9ab]);)'</span>;</div><div class="line">               <span class="variable">$pattern</span> .= <span class="string">'|'</span>; </div><div class="line">               <span class="variable">$pattern</span> .= <span class="string">'|(�&#123;0,8&#125;([9|10|13]);)'</span>;</div><div class="line">               <span class="variable">$pattern</span> .= <span class="string">')*'</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="variable">$pattern</span> .= <span class="variable">$ra</span>[<span class="variable">$i</span>][<span class="variable">$j</span>];</div><div class="line">         &#125;</div><div class="line">         <span class="variable">$pattern</span> .= <span class="string">'/i'</span>; </div><div class="line">         <span class="variable">$replacement</span> = substr(<span class="variable">$ra</span>[<span class="variable">$i</span>], 0, 2).<span class="string">'&lt;x&gt;'</span>.substr(<span class="variable">$ra</span>[<span class="variable">$i</span>], 2); // add <span class="keyword">in</span> &lt;&gt; to nerf the tag </div><div class="line">         <span class="variable">$val</span> = preg_replace(<span class="variable">$pattern</span>, <span class="variable">$replacement</span>, <span class="variable">$val</span>); // filter out the hex tags </div><div class="line">         <span class="keyword">if</span> (<span class="variable">$val_before</span> == <span class="variable">$val</span>) &#123; </div><div class="line">            // no replacements were made, so <span class="built_in">exit</span> the loop </div><div class="line">            <span class="variable">$found</span> = <span class="literal">false</span>; </div><div class="line">         &#125; </div><div class="line">      &#125; </div><div class="line">   &#125; </div><div class="line">   <span class="built_in">return</span> <span class="variable">$val</span>; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>将前端传来的数据，调用这个函数，过滤一下就可以了。<br>此函数来源于网络。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/04/ST3kuaijiejian/" rel="next" title="sublimeText快捷键操作">
+                <i class="fa fa-chevron-left"></i> sublimeText快捷键操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame">
+				<!-- UY BEGIN -->
+				<div id="uyan_frame"></div>
+				<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2132622"></script>
+				<!-- UY END -->
+	  </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="helloSmallCat" />
+          <p class="site-author-name" itemprop="name">helloSmallCat</p>
+           
+              <p class="site-description motion-element" itemprop="description">This is a site built with Hexo</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">helloSmallCat</span>
+</div>
+
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">幕后老板 - Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  <span>
+  主题 -
+  <a class="theme-link" href="https://twitter.com/i_fucked_u">
+    helloSmallCat.Muse 
+  </a>
+  </span>
+  <span><b><i class="fa fa-twitter" style="color:rgb(29, 161, 242);padding-top:3px"></i></b></span>
+</div>
+<script>
+	
+</script>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2132622"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
