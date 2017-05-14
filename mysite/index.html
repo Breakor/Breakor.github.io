@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>my site</title>
+	<link rel="stylesheet" href="mysitecss.css">
+	<script type="text/javascript" src="mysitejs.js"></script>
+<!-- 	<script type="text/javascript">
+		function one(id){
+	document.getElementById(id).style.display="inline";
+}
+	</script> -->
+</head>
+<body>
+	<div id="pagehead" style="z-index:-3; position:relative;">
+		<div id="guanyu"><img src="guanyu.png" width="500" alt="" ></div>
+		<div id="mainname"><img src="haha.png"; style="" alt=""/></div>
+		<div></div>
+	</div>
+	<div >
+		<div>
+			<div id="mainmenu">
+				<ul id="next">
+					<li><a href="">九阳神功</a></li>
+					<li><a href="">吸星大法</a></li>
+					<li><a href="">如来神掌</a></li>
+					<li><a href="">独孤九剑</a></li>
+					<li onmouseover="one('secondmenu')" onmouseout="two('secondmenu')"><a href="">辟邪剑谱</a></li>
+					<li><a href="">葵花宝典</a></li>
+				</ul>
+			</div>
+			<div id="secondmenu" style="display: none" onmouseover="one('secondmenu')" onmouseout="two('secondmenu')">
+				<ul id="second">
+					<li><a href="">拜师</a></li>
+					<li><a href="">修炼</a></li>
+					<li><a href="">挑战</a></li>
+					<li><a href="">升仙</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- Z-index 仅能在定位元素上奏效（例如 position:absolute;）！ -->
+		<div style="position: relative; margin: 1px auto; width: 700px; margin-top: -170px; z-index: -2">
+			<div>
+				<img src="haha.png" alt="" width="760">
+			</div>
+			<div style="float: right; margin-top: -70px;">
+				<span>1</span>
+				<span>2</span>
+				<span>3</span>
+				<span>4</span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

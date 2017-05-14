@@ -1,0 +1,111 @@
+
+body{
+	background: #755D5D;
+	margin: 0; 
+	padding: 0;
+}
+a{
+	text-decoration: none;
+	/*background: black;*/
+
+}
+/*a:link{color:black;} */
+a:visited {color:black;}
+#pagehead{
+/*	border: 1px solid #A18E8E;*/
+	height: 150px;
+}
+#guanyu{
+	height: 100px;
+/*	border: 1px solid #A18E8E;*/
+	margin-left: 15px;
+	filter: blur(0.2px);
+    -webkit-filter: blur(0.2px);  /* chrome, opera */
+    -ms-filter: blur(0.2px);
+    -moz-filter: blur(0.2px);
+    margin-top:-30px;
+}
+#mainname{
+	text-align: center;
+	/*border:1px solid black;*/
+	margin-top:-135px;
+	filter: blur(0.1px);
+    -webkit-filter: blur(0.1px);  /* chrome, opera */
+    -ms-filter: blur(0.1px);
+    -moz-filter: blur(0.1px);
+}
+#mainmenu{
+/*	border: 1px solid #A18E8E;*/
+	width: 700px;
+	height: 100px;
+/*	padding: 0;
+	margin: 0;*/
+	position: relative;
+	margin: 70px auto;
+}
+#secondmenu{
+	/*border: 1px solid #A18E8E;*/
+	width: 700px;
+	height: 100px;
+	top: 205px;
+	left:733px;
+/*	padding: 0;
+	margin: 0;*/
+	position: absolute;
+	/*margin: 70px auto;*/
+	/*display: none;*/
+}
+ul{
+	list-style: none;
+	margin-left: 10px;
+}
+#mainmenu li{
+	display: inline-block;
+	background: #A18E8E;
+	width: 100px;
+	height: 30px;
+	text-align: center;
+	line-height: 28px;
+	font-size: 16px;
+	font-weight: bold;
+	font-family: 楷体;
+	color: black;
+	box-shadow:inset 0 0 5px rgba(0,0,0,.5),-1px 1px 0 rgba(255,255,255,.05);
+	border: 1px solid #A18E8E;
+/*	margin: -1.7px;*/
+	border-radius: 2.8px;
+	float:left;
+
+
+	/*border: 1px solid gray ; width: 40px; height: 15px; float: left;
+	background: #E79E9E;
+	padding: 0;
+	margin-top: 1px;
+	bottom: 0;
+	position: relative*/
+}
+#secondmenu li{
+	/*display: inline-block;*/
+	background: #908080;
+	width: 100px;
+	height: 23px;
+	text-align: center;
+	line-height: 20px;
+	font-size: 16px;
+	/*font-weight: bold;*/
+	font-family: 楷体;
+	color: black;
+	box-shadow:inset 0 0 5px rgba(0,0,0,.5),-1px 1px 0 rgba(255,255,255,.05);
+	border: 1px solid #A18E8E;
+/*	margin: -1.7px;*/
+	border-radius: 4px;
+	/*float:left;*/
+
+
+	/*border: 1px solid gray ; width: 40px; height: 15px; float: left;
+	background: #E79E9E;
+	padding: 0;
+	margin-top: 1px;
+	bottom: 0;
+	position: relative*/
+}
