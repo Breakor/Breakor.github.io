@@ -1,5 +1,7 @@
 
-html {
-	background-color: #c55D5D
+html.page-home  {
+	background-color: #C0EDD8
 }
-
+.box-blog-info {
+	background-color: #C0EDD8
+}
