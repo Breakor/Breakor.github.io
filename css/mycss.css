@@ -1,7 +1,10 @@
 
-html.page-home  {
-	background-color: #C0EDD8
+html {
+	background-color: #F1F1F1
 }
 .box-blog-info {
-	background-color: #C0EDD8
+	background-color: #F1F1F1
+}
+.btn-donation {
+	background-color: #FFFFFF
 }
