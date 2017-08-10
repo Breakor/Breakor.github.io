@@ -1,693 +1,454 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
+  <html class="light page-post">
 
-  
 
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="utf-8">
+  
+  <title>jquery的checkbox,radio,select等方法总结 | 填坑到何月</title>
 
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
+    <meta name="keywords" content="forsigner,前端,设计,Hexo主题,前端开发,用户体验,设计,frontend,design,nodejs,JavaScript" />
   
 
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="jquery的checkbox，radio，和select是jquery操作的一个难点和重点！ 1、checkbox日常jquery操作。12345678910111213141516171819202122232425262728293031//以下面的html为例进行checkbox的操作。&amp;lt;input id=&quot;checkAll&quot; type=&quot;checkbox&quot; /&amp;gt;全选">
+  <meta name="description" content="jquery的checkbox，radio，和select是jquery操作的一个难点和重点！ 1、checkbox日常jquery操作。12345678910111213141516171819202122232425262728293031//以下面的html为例进行checkbox的操作。&amp;lt;input id=&quot;checkAll&quot; type=&quot;checkbox&quot; /&amp;gt;全选">
 <meta property="og:type" content="article">
 <meta property="og:title" content="jquery的checkbox,radio,select等方法总结">
 <meta property="og:url" content="http://breakor.github.io/2016/05/03/jquery的checkbox,radio,select等方法总结/index.html">
-<meta property="og:site_name" content="Developed by helloSmallCat">
+<meta property="og:site_name" content="填坑到何月">
 <meta property="og:description" content="jquery的checkbox，radio，和select是jquery操作的一个难点和重点！ 1、checkbox日常jquery操作。12345678910111213141516171819202122232425262728293031//以下面的html为例进行checkbox的操作。&amp;lt;input id=&quot;checkAll&quot; type=&quot;checkbox&quot; /&amp;gt;全选">
 <meta property="og:updated_time" content="2017-05-12T05:33:43.457Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jquery的checkbox,radio,select等方法总结">
 <meta name="twitter:description" content="jquery的checkbox，radio，和select是jquery操作的一个难点和重点！ 1、checkbox日常jquery操作。12345678910111213141516171819202122232425262728293031//以下面的html为例进行checkbox的操作。&amp;lt;input id=&quot;checkAll&quot; type=&quot;checkbox&quot; /&amp;gt;全选">
 
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
 
 
 
-  <link rel="canonical" href="http://breakor.github.io/2016/05/03/jquery的checkbox,radio,select等方法总结/"/>
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
 
-
-
-
-
-  <title>jquery的checkbox,radio,select等方法总结 | Developed by helloSmallCat</title>
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
+<body>
 
 
   
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
   
-    
-  
 
-  <div class="container sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Developed by helloSmallCat</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
       
-        <p class="site-subtitle">Web development</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            博文
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
             标签
           </a>
         </li>
       
-
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/atom.xml"
+            rel="noopener noreferrer"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
       
     </ul>
-  
-
-  
-</nav>
+  </div>
 
 
+</div>
 
- </div>
-    </header>
 
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">Posts List</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、checkbox日常jquery操作。"><span class="toc-text">1、checkbox日常jquery操作。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、radio的jquery日常操作及属性"><span class="toc-text">2、radio的jquery日常操作及属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、select下拉框的日常jquery操作"><span class="toc-text">3、select下拉框的日常jquery操作</span></a></li></ol>
+  </div>
 
-  <div id="posts" class="posts-expand">
-    
 
-  
 
-  
-  
-  
+<div class="content content-post CENTER">
+   <article id="post-jquery的checkbox,radio,select等方法总结" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">jquery的checkbox,radio,select等方法总结</h1>
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://breakor.github.io/2016/05/03/jquery的checkbox,radio,select等方法总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="helloSmallCat">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Developed by helloSmallCat">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">jquery的checkbox,radio,select等方法总结</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-03T00:00:22+08:00">
-                2016-05-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.05.03</span>
+      </span>
 
       
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>helloSmallCat</span>
+        </span>
       
 
       
-        <p>jquery的checkbox，radio，和select是jquery操作的一个难点和重点！</p>
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://www.yahoo.com/2016/05/03/jquery的checkbox,radio,select等方法总结/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <p>jquery的checkbox，radio，和select是jquery操作的一个难点和重点！</p>
 <h3 id="1、checkbox日常jquery操作。"><a href="#1、checkbox日常jquery操作。" class="headerlink" title="1、checkbox日常jquery操作。"></a>1、checkbox日常jquery操作。</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">//以下面的html为例进行checkbox的操作。</div><div class="line">&lt;input id=<span class="string">"checkAll"</span> <span class="built_in">type</span>=<span class="string">"checkbox"</span> /&gt;全选</div><div class="line">        &lt;input name=<span class="string">"subBox"</span> <span class="built_in">type</span>=<span class="string">"checkbox"</span> /&gt;项1</div><div class="line">        &lt;input name=<span class="string">"subBox"</span> <span class="built_in">type</span>=<span class="string">"checkbox"</span> /&gt;项2</div><div class="line">        &lt;input name=<span class="string">"subBox"</span> <span class="built_in">type</span>=<span class="string">"checkbox"</span> /&gt;项3</div><div class="line">        &lt;input name=<span class="string">"subBox"</span> <span class="built_in">type</span>=<span class="string">"checkbox"</span> /&gt;项4</div><div class="line">//全选和全部选代码。</div><div class="line">&lt;script <span class="built_in">type</span>=<span class="string">"text/javascript"</span>&gt;</div><div class="line">        $(<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">           $(<span class="string">"#checkAll"</span>).click(<span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">                $(<span class="string">'input[name="subBox"]'</span>).attr(<span class="string">"checked"</span>,this.checked); </div><div class="line">            &#125;);</div><div class="line">            var <span class="variable">$subBox</span> = $(<span class="string">"input[name='subBox']"</span>);</div><div class="line">            <span class="variable">$subBox</span>.click(<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">                $(<span class="string">"#checkAll"</span>).attr(<span class="string">"checked"</span>,<span class="variable">$subBox</span>.length == $(<span class="string">"input[name='subBox']:checked"</span>).length ? <span class="literal">true</span> : <span class="literal">false</span>);</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;!--checkbox属性，jquery1.6之后新增.prop()属性，因此jquery1.6之后的版本，用var isSelected = $(<span class="string">"#checkAll"</span>).prop(<span class="string">"checked"</span>)；选中则isSelected=<span class="literal">true</span>;否则isSelected=<span class="literal">false</span>;  来判断是否选中！--&gt;</div><div class="line">var val = $(<span class="string">"#checkAll"</span>).val();// 获取指定id的复选框的值  </div><div class="line">var isSelected = $(<span class="string">"#checkAll"</span>).attr(<span class="string">"checked"</span>); // 判断id=checkAll的那个复选框是否处于选中状态，选中则isSelected=<span class="literal">true</span>;否则isSelected=<span class="literal">false</span>;  //jquery1.6之后版本，用prop()判断。应该写成 isSelected = $(<span class="string">"#checkAll"</span>).prop(<span class="string">"checked"</span>);</div><div class="line">$(<span class="string">"#checkAll"</span>).attr(<span class="string">"checked"</span>, <span class="literal">true</span>);// or  </div><div class="line">$(<span class="string">"#checkAll"</span>).attr(<span class="string">"checked"</span>, <span class="string">'checked'</span>);// 将id=checkbox_id3的那个复选框选中，即打勾  </div><div class="line">$(<span class="string">"#checkAll"</span>).attr(<span class="string">"checked"</span>, <span class="literal">false</span>);// or  </div><div class="line">$(<span class="string">"#checkAll"</span>).attr(<span class="string">"checked"</span>, <span class="string">''</span>);// 将id=checkbox_id3的那个复选框不选中，即不打勾  </div><div class="line">$(<span class="string">"input[name=subBox][value=3]"</span>).attr(<span class="string">"checked"</span>, <span class="string">'checked'</span>);// 将name=subBox, value=3 的那个复选框选中，即打勾  </div><div class="line">$(<span class="string">"input[name=subBox][value=3]"</span>).attr(<span class="string">"checked"</span>, <span class="string">''</span>);// 将name=subBox, value=3 的那个复选框不选中，即不打勾  </div><div class="line">$(<span class="string">"input[type=checkbox][name=subBox]"</span>).get(2).checked = <span class="literal">true</span>;// 设置index = 2，即第三项为选中状态  </div><div class="line">$(<span class="string">"input[type=checkbox]:checked"</span>).each(<span class="function"><span class="title">function</span></span>()&#123; //由于复选框一般选中的是多个,所以可以循环输出选中的值  </div><div class="line">    alert($(this).val());  </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h3 id="2、radio的jquery日常操作及属性"><a href="#2、radio的jquery日常操作及属性" class="headerlink" title="2、radio的jquery日常操作及属性"></a>2、radio的jquery日常操作及属性</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//再次以下面的html为例。</div><div class="line">&lt;input <span class="built_in">type</span>=<span class="string">"radio"</span> name=<span class="string">"radio"</span> id=<span class="string">"radio1"</span> value=<span class="string">"1"</span> /&gt;1  </div><div class="line">&lt;input <span class="built_in">type</span>=<span class="string">"radio"</span> name=<span class="string">"radio"</span> id=<span class="string">"radio2"</span> value=<span class="string">"2"</span> /&gt;2  </div><div class="line">&lt;input <span class="built_in">type</span>=<span class="string">"radio"</span> name=<span class="string">"radio"</span> id=<span class="string">"radio3"</span> value=<span class="string">"3"</span> /&gt;3  </div><div class="line">&lt;input <span class="built_in">type</span>=<span class="string">"radio"</span> name=<span class="string">"radio"</span> id=<span class="string">"radio4"</span> value=<span class="string">"4"</span> /&gt;4 </div><div class="line">//radio操作如下。</div><div class="line">$(<span class="string">"input[name=radio]:eq(0)"</span>).attr(<span class="string">"checked"</span>,<span class="string">'checked'</span>); //这样就是第一个选中咯。</div><div class="line">  //jquery中，radio的选中与否和checkbox是一样的。</div><div class="line">$(<span class="string">"#radio1"</span>).attr(<span class="string">"checked"</span>,<span class="string">"checked"</span>);</div><div class="line">$(<span class="string">"#radio1"</span>).removeAttr(<span class="string">"checked"</span>);</div><div class="line">$(<span class="string">"input[type='radio'][name='radio']:checked"</span>).length == 0 ? <span class="string">"没有任何单选框被选中"</span> : <span class="string">"已经有选中"</span>;  </div><div class="line">$(<span class="string">'input[type="radio"][name="radio"]:checked'</span>).val(); // 获取一组radio被选中项的值  </div><div class="line">$(<span class="string">"input[type='radio'][name='radio'][value='2']"</span>).attr(<span class="string">"checked"</span>, <span class="string">"checked"</span>);// 设置value = 2的一项为选中  </div><div class="line">$(<span class="string">"#radio2"</span>).attr(<span class="string">"checked"</span>, <span class="string">"checked"</span>); // 设置id=radio2的一项为选中  </div><div class="line">$(<span class="string">"input[type='radio'][name='radio']"</span>).get(1).checked = <span class="literal">true</span>; // 设置index = 1，即第二项为当前选中  </div><div class="line">var isChecked = $(<span class="string">"#radio2"</span>).attr(<span class="string">"checked"</span>);// id=radio2的一项处于选中状态则isChecked = <span class="literal">true</span>, 否则isChecked = <span class="literal">false</span>;  </div><div class="line">var isChecked = $(<span class="string">"input[type='radio'][name='radio'][value='2']"</span>).attr(<span class="string">"checked"</span>);// value=2的一项处于选中状态则isChecked = <span class="literal">true</span>, 否则isChecked = <span class="literal">false</span>;</div></pre></td></tr></table></figure>
 <h3 id="3、select下拉框的日常jquery操作"><a href="#3、select下拉框的日常jquery操作" class="headerlink" title="3、select下拉框的日常jquery操作"></a>3、select下拉框的日常jquery操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">//仍然以下面的html为例。</div><div class="line">&lt;select name=<span class="string">"select"</span> id=<span class="string">"select_id"</span> style=<span class="string">"width: 100px;"</span>&gt;  </div><div class="line">    &lt;option value=<span class="string">"1"</span>&gt;11&lt;/option&gt;  </div><div class="line">    &lt;option value=<span class="string">"2"</span>&gt;22&lt;/option&gt;  </div><div class="line">    &lt;option value=<span class="string">"3"</span>&gt;33&lt;/option&gt;  </div><div class="line">    &lt;option value=<span class="string">"4"</span>&gt;44&lt;/option&gt;  </div><div class="line">    &lt;option value=<span class="string">"5"</span>&gt;55&lt;/option&gt;  </div><div class="line">    &lt;option value=<span class="string">"6"</span>&gt;66&lt;/option&gt;  </div><div class="line">&lt;/select&gt;</div><div class="line">//看select的如下属性。</div><div class="line">$(<span class="string">"#select_id"</span>).change(<span class="function"><span class="title">function</span></span>()&#123;// 1.为Select添加事件，当选择其中一项时触发   </div><div class="line">        //code...  </div><div class="line">    &#125;);  </div><div class="line">var checkValue = $(<span class="string">"#select_id"</span>).val(); // 2.获取Select选中项的Value  </div><div class="line">var checkText = $(<span class="string">"#select_id :selected"</span>).text(); // 3.获取Select选中项的Text   </div><div class="line">var checkIndex = $(<span class="string">"#select_id"</span>).attr(<span class="string">"selectedIndex"</span>); // 4.获取Select选中项的索引值,或者：$(<span class="string">"#select_id"</span>).get(0).selectedIndex;  </div><div class="line">var maxIndex =$(<span class="string">"#select_id :last"</span>).get(0).index; // 5.获取Select最大的索引值</div><div class="line">/** jQuery设置Select的选中项  */  </div><div class="line">$(<span class="string">"#select_id"</span>).get(0).selectedIndex = 1; // 1.设置Select索引值为1的项选中  </div><div class="line">$(<span class="string">"#select_id"</span>).val(4);                                    // 2.设置Select的Value值为4的项选中  </div><div class="line">/** jQuery添加/删除Select的Option项 */  </div><div class="line">$(<span class="string">"#select_id"</span>).append(<span class="string">"&lt;option value='新增'&gt;新增option&lt;/option&gt;"</span>); // 1.为Select追加一个Option(下拉项)   </div><div class="line">$(<span class="string">"#select_id"</span>).prepend(<span class="string">"&lt;option value='请选择'&gt;请选择&lt;/option&gt;"</span>); // 2.为Select插入一个Option(第一个位置)  </div><div class="line">$(<span class="string">"#select_id"</span>).get(0).remove(1); // 3.删除Select中索引值为1的Option(第二个)  </div><div class="line">$(<span class="string">"#select_id :last"</span>).remove(); // 4.删除Select中索引值最大Option(最后一个)   </div><div class="line">$(<span class="string">"#select_id [value='3']"</span>).remove(); // 5.删除Select中Value=<span class="string">'3'</span>的Option   </div><div class="line">$(<span class="string">"#select_id"</span>).empty();             </div><div class="line">$(<span class="string">"#select_id"</span>).find(<span class="string">"option:selected"</span>).text(); // 获取select 选中的 text :</div><div class="line">$(<span class="string">"#select_id"</span>).val(); // 获取select选中的 value:</div><div class="line">$(<span class="string">"#select_id"</span>).get(0).selectedIndex; // 获取select选中的索引:</div><div class="line">//设置select 选中的value：</div><div class="line">$(<span class="string">"#select_id"</span>).attr(<span class="string">"value"</span>,<span class="string">"Normal"</span>);</div><div class="line">$(<span class="string">"#select_id"</span>).val(<span class="string">"Normal"</span>);</div><div class="line">$(<span class="string">"#select_id"</span>).get(0).value = value;</div><div class="line">//设置select 选中的text，通常可以在select回填中使用</div><div class="line">var numId=33 //设置text==33的选中！</div><div class="line">var count=$(<span class="string">"#select_id  option"</span>).length;</div><div class="line"><span class="keyword">for</span>(var i=0;i&lt;count;i++)&#123;</div><div class="line">   <span class="keyword">if</span>($(<span class="string">"#select_id"</span>).get(0).options[i].text == numId)&#123;  </div><div class="line">         $(<span class="string">"#select_id"</span>).get(0).options[i].selected = <span class="literal">true</span>;  </div><div class="line">         <span class="built_in">break</span>;  </div><div class="line">   &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/04/11/百度地图或者高德地图开发/" rel="next" title="百度地图或者高德地图开发">
-                <i class="fa fa-chevron-left"></i> 百度地图或者高德地图开发
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/20/jquery中$.proxy及wrap()的使用/" rel="prev" title="jquery中$.proxy及wrap()的使用">
-                jquery中$.proxy及wrap()的使用 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="uyan_frame">
-				<!-- UY BEGIN -->
-				<div id="uyan_frame"></div>
-				<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2132622"></script>
-				<!-- UY END -->
-	  </div>
     
   </div>
+</article>
 
 
-        </div>
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持 填坑哥</div>
+        <ul class="theme.donation.items.length">
         
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
           </li>
+        
         </ul>
-      
+      </div>
+    </div>
+  </div>
 
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="helloSmallCat" />
-          <p class="site-author-name" itemprop="name">helloSmallCat</p>
-           
-              <p class="site-description motion-element" itemprop="description">填坑到何年</p>
-          
-        </div>
-        <nav class="site-state motion-element">
 
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2016/04/11/百度地图或者高德地图开发/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2016/05/20/jquery中$.proxy及wrap()的使用/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
 
-          
 
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
 
-        </nav>
 
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
         
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
         
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
         
-
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
         
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
         
-
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
         
-
-
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、checkbox日常jquery操作。"><span class="nav-number">1.</span> <span class="nav-text">1、checkbox日常jquery操作。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、radio的jquery日常操作及属性"><span class="nav-number">2.</span> <span class="nav-text">2、radio的jquery日常操作及属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、select下拉框的日常jquery操作"><span class="nav-number">3.</span> <span class="nav-text">3、select下拉框的日常jquery操作</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/atom.xml"
+              rel="noopener noreferrer"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
 
     </div>
-  </aside>
+  </div>
+</div>
 
 
-        
-      </div>
-    </main>
 
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
   
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">helloSmallCat</span>
-</div>
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'http://breakor.github.io/2016/05/03/jquery的checkbox,radio,select等方法总结/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
 
 
 
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">幕后老板 - Hexo</a> 强力驱动
-</div>
+    
 
-<div class="theme-info">
-  <span>
-  主题 -
-  <a class="theme-link" href="https://twitter.com/i_fucked_u">
-    helloSmallCat.Muse 
-  </a>
-  </span>
-  <span><b><i class="fa fa-twitter" style="color:rgb(29, 161, 242);padding-top:3px"></i></b></span>
-</div>
-<script>
+
+
+
+    
+
+    
 	
-</script>
-
-
-        
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
   </div>
 
   
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
   }
 </script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-    
-
-    
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2132622"></script>
-      <!-- UY END -->
-    
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>

@@ -1,666 +1,447 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
+  <html class="light page-post">
 
-  
 
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <meta charset="utf-8">
+  
+  <title>windows上帝模式 | 填坑到何月</title>
 
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
+    <meta name="keywords" content="forsigner,前端,设计,Hexo主题,前端开发,用户体验,设计,frontend,design,nodejs,JavaScript" />
   
 
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta name="description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657回收站.&amp;#123;645ff040-5081-101b-9f08-00aa002f954e&amp;#125; 拨号网络.&amp;#123;992CFFA0-F557-101A-88EC-00DD010">
+  <meta name="description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657回收站.&amp;#123;645ff040-5081-101b-9f08-00aa002f954e&amp;#125; 拨号网络.&amp;#123;992CFFA0-F557-101A-88EC-00DD010">
 <meta property="og:type" content="article">
 <meta property="og:title" content="windows上帝模式">
 <meta property="og:url" content="http://breakor.github.io/2015/05/02/shangdimoshi/index.html">
-<meta property="og:site_name" content="Developed by helloSmallCat">
+<meta property="og:site_name" content="填坑到何月">
 <meta property="og:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657回收站.&amp;#123;645ff040-5081-101b-9f08-00aa002f954e&amp;#125; 拨号网络.&amp;#123;992CFFA0-F557-101A-88EC-00DD010">
 <meta property="og:updated_time" content="2017-05-12T04:21:27.961Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windows上帝模式">
 <meta name="twitter:description" content="123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657回收站.&amp;#123;645ff040-5081-101b-9f08-00aa002f954e&amp;#125; 拨号网络.&amp;#123;992CFFA0-F557-101A-88EC-00DD010">
 
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
 
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
+  
+    <link rel="stylesheet" href="/css/personal-style.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
 
 
 
-  <link rel="canonical" href="http://breakor.github.io/2015/05/02/shangdimoshi/"/>
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
 
-
-
-
-
-  <title>windows上帝模式 | Developed by helloSmallCat</title>
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
+<body>
 
 
   
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
   
-    
-  
 
-  <div class="container sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Developed by helloSmallCat</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
       
-        <p class="site-subtitle">Web development</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            博文
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
             标签
           </a>
         </li>
       
-
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/atom.xml"
+            rel="noopener noreferrer"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="CIRCLE"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
       
     </ul>
-  
-
-  
-</nav>
+  </div>
 
 
+</div>
 
- </div>
-    </header>
 
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
 
-  <div id="posts" class="posts-expand">
-    
 
-  
+<div class="content content-post CENTER">
+   <article id="post-shangdimoshi" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">windows上帝模式</h1>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://breakor.github.io/2015/05/02/shangdimoshi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="helloSmallCat">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Developed by helloSmallCat">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">windows上帝模式</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-02T20:10:32+08:00">
-                2015-05-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2015.05.02</span>
+      </span>
 
       
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>helloSmallCat</span>
+        </span>
       
 
       
-        <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">回收站.&#123;645ff040-5081-101b-9f08-00aa002f954e&#125; </div><div class="line">拨号网络.&#123;992CFFA0-F557-101A-88EC-00DD010CCC48&#125; </div><div class="line">打印机.&#123;2227a280-3aea-1069<span class="_">-a</span>2de-08002b30309d&#125; </div><div class="line">控制面板.&#123;21ec2020-3aea-1069<span class="_">-a</span>2dd-08002b30309d&#125; </div><div class="line">网上邻居.&#123;208D2C60-3AEA-1069-A2D7-08002B30309D&#125;</div><div class="line">图标clsid=windowsmedia 文件名.&#123;00020c01-0000-0000-c000-000000000046&#125; </div><div class="line">无关联文件 文件名.&#123;00021401-0000-0000-c000-000000000046&#125; </div><div class="line">BMP文件 文件名.&#123;d3e34b21-9d75-101a-8c3d-00aa001a1652&#125; </div><div class="line">HTML文件 文件名.&#123;25336920-03f9-11cf-8fd0-00aa00686f13&#125; </div><div class="line">媒体剪辑文件 文件名.&#123;00022601-0000-0000-c000-000000000046&#125; </div><div class="line">打印机 文件名.&#123;2227a280-3aea-1069-A2de-08002b30309d&#125; </div><div class="line">控制面板 文件名.&#123;21ec2020-3aea-1069-A2dd-08002b30309d&#125; </div><div class="line">网上邻居 文件名.&#123;208d2c60-3aea-1069-A2d7-08002b30309d&#125; </div><div class="line">拨号网络 文件名.&#123;992cffa0-F557-101a-88ec-00dd010ccc48&#125; </div><div class="line">计划任务 文件名.&#123;D6277990-4c6a-11cf-8d87-00aa0060f5bf&#125; </div><div class="line">回收站 文件名.&#123;645ff040-5081-101b-9f08-00aa002f954e&#125; </div><div class="line">Web文件夹 文件名.&#123;Bdeadf00-C265-11d0-Bced-00a0c90ab50f&#125; </div><div class="line">历史记录 文件名.&#123;Ff393560-C2a7-11cf-Bff4-444553540000&#125; </div><div class="line">收藏夹 文件名.&#123;1a9ba3a0-143a-11cf-8350-444553540000&#125; </div><div class="line">预订文件夹 文件名.&#123;F5175861-2688-11d0-9c5e-00aa00a45957&#125; </div><div class="line">ActiveX高速缓存文件夹文件名.&#123;88c6c381-2e85-11d0-94de-444553540000&#125; </div><div class="line">excel.&#123;00020810-0000-0000-C000-000000000046&#125; </div><div class="line">word.&#123;00020900-0000-0000-C000-000000000046&#125; </div><div class="line">media.&#123;00022603-0000-0000-C000-000000000046&#125; </div><div class="line">CAB.&#123;0CD7A5C0-9F37-11CE-AE65-08002B2E1262&#125; </div><div class="line">搜索-计算机.&#123;1f4de370<span class="_">-d</span>627-11d1-ba4f-00a0c91eedba&#125; </div><div class="line">mht.&#123;3050F3D9-98B5-11CF-BB82-00AA00BDCE0B&#125; </div><div class="line">mshta.&#123;3050f4d8-98B5-11CF-BB82-00AA00BDCE0B&#125; </div><div class="line">我的文档.&#123;450D8FBA-AD25-11D0-98A8-0800361B1103&#125; </div><div class="line">XML.&#123;48123bc4-99d9-11d1<span class="_">-a</span>6b3-00c04fd91555&#125; </div><div class="line">回收站(满).&#123;5ef4af3a<span class="_">-f</span>726-11d0-b8a2-00c04<span class="built_in">fc</span>309a4&#125; </div><div class="line">回收站.&#123;645FF040-5081-101B-9F08-00AA002F954E&#125; </div><div class="line">ftp_folder.&#123;63da6ec0-2e98-11cf-8d82-444553540000&#125; </div><div class="line">网络和拨号连接.&#123;7007ACC7-3202-11D1-AAD2-00805FC1270E&#125; </div><div class="line">写字板文档.&#123;73FDDC80-AEA9-101A-98A7-00AA00374959&#125; </div><div class="line">Temporary Offline Files Cleaner.&#123;750fdf0f-2a26-11d1<span class="_">-a</span>3ea-080036587f03&#125; </div><div class="line">用户和密码.&#123;7A9D77BD-5403-11d2-8785-2E0420524153&#125; </div><div class="line">Internet 临时文件.&#123;7BD29E00-76C1-11CF-9DD0-00A0C9034933&#125; </div><div class="line">已下载的程序文件的清除程序.&#123;8369AB20-56C9-11D0-94E8-00AA0059CE02&#125; </div><div class="line">公文包.&#123;85BBD920-42A0-1069-A2E4-08002B30309D&#125; </div><div class="line">ActiveX 高速缓存文件夹.&#123;88C6C381-2E85-11D0-94DE-444553540000&#125; </div><div class="line">mail.&#123;9E56BE60-C50F-11CF-9A2C-00A0C90A90CE&#125; </div><div class="line">历史记录.&#123;FF393560-C2A7-11CF-BFF4-444553540000&#125; </div><div class="line">目录.&#123;fe1290f0-cfbd-11cf<span class="_">-a</span>330-00aa00c16e65&#125; </div><div class="line">Internet Explorer.&#123;FBF23B42-E3F0-101B-8488-00AA003E56F8&#125; </div><div class="line">Snapshot File.&#123;FACB5ED2-7F99-11D0-ADE2-00A0C90DC8D9&#125; </div><div class="line">预订文件夹.&#123;F5175861-2688-11d0-9C5E-00AA00A45957&#125; </div><div class="line">MyDocs Drop Target.&#123;ECF03A32-103D-11d2-854D-006008059367&#125; </div><div class="line">Policy Package.&#123;ecabaebd-7f19-11d2-978E-0000f8757e2a&#125; </div><div class="line">搜索结果.&#123;e17d4<span class="built_in">fc</span>0-5564-11d1-83f2-00a0c90dc849&#125; </div><div class="line">添加网上邻居.&#123;D4480A50-BA28-11d1-8E75-00C04FA31A86&#125; </div><div class="line">Paint.&#123;D3E34B21-9D75-101A-8C3D-00AA001A1652&#125; </div><div class="line">管理工具.&#123;D20EA4E1-3957-11d2-A40B-0C5020524153&#125; </div><div class="line">字体.&#123;D20EA4E1-3957-11d2-A40B-0C5020524152&#125; </div><div class="line">Web Folders.&#123;BDEADF00-C265-11d0-BCED-00A0C90AB50F&#125; </div><div class="line">DocFind Command.&#123;B005E690-678D-11d1-B758-00A0C90564FE&#125; </div><div class="line">脱机文件夹.&#123;AFDB1F70-2A4C-11d2-9039-00C04F8EEB3E&#125;</div></pre></td></tr></table></figure>
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://www.yahoo.com/2015/05/02/shangdimoshi/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">回收站.&#123;645ff040-5081-101b-9f08-00aa002f954e&#125; </div><div class="line">拨号网络.&#123;992CFFA0-F557-101A-88EC-00DD010CCC48&#125; </div><div class="line">打印机.&#123;2227a280-3aea-1069<span class="_">-a</span>2de-08002b30309d&#125; </div><div class="line">控制面板.&#123;21ec2020-3aea-1069<span class="_">-a</span>2dd-08002b30309d&#125; </div><div class="line">网上邻居.&#123;208D2C60-3AEA-1069-A2D7-08002B30309D&#125;</div><div class="line">图标clsid=windowsmedia 文件名.&#123;00020c01-0000-0000-c000-000000000046&#125; </div><div class="line">无关联文件 文件名.&#123;00021401-0000-0000-c000-000000000046&#125; </div><div class="line">BMP文件 文件名.&#123;d3e34b21-9d75-101a-8c3d-00aa001a1652&#125; </div><div class="line">HTML文件 文件名.&#123;25336920-03f9-11cf-8fd0-00aa00686f13&#125; </div><div class="line">媒体剪辑文件 文件名.&#123;00022601-0000-0000-c000-000000000046&#125; </div><div class="line">打印机 文件名.&#123;2227a280-3aea-1069-A2de-08002b30309d&#125; </div><div class="line">控制面板 文件名.&#123;21ec2020-3aea-1069-A2dd-08002b30309d&#125; </div><div class="line">网上邻居 文件名.&#123;208d2c60-3aea-1069-A2d7-08002b30309d&#125; </div><div class="line">拨号网络 文件名.&#123;992cffa0-F557-101a-88ec-00dd010ccc48&#125; </div><div class="line">计划任务 文件名.&#123;D6277990-4c6a-11cf-8d87-00aa0060f5bf&#125; </div><div class="line">回收站 文件名.&#123;645ff040-5081-101b-9f08-00aa002f954e&#125; </div><div class="line">Web文件夹 文件名.&#123;Bdeadf00-C265-11d0-Bced-00a0c90ab50f&#125; </div><div class="line">历史记录 文件名.&#123;Ff393560-C2a7-11cf-Bff4-444553540000&#125; </div><div class="line">收藏夹 文件名.&#123;1a9ba3a0-143a-11cf-8350-444553540000&#125; </div><div class="line">预订文件夹 文件名.&#123;F5175861-2688-11d0-9c5e-00aa00a45957&#125; </div><div class="line">ActiveX高速缓存文件夹文件名.&#123;88c6c381-2e85-11d0-94de-444553540000&#125; </div><div class="line">excel.&#123;00020810-0000-0000-C000-000000000046&#125; </div><div class="line">word.&#123;00020900-0000-0000-C000-000000000046&#125; </div><div class="line">media.&#123;00022603-0000-0000-C000-000000000046&#125; </div><div class="line">CAB.&#123;0CD7A5C0-9F37-11CE-AE65-08002B2E1262&#125; </div><div class="line">搜索-计算机.&#123;1f4de370<span class="_">-d</span>627-11d1-ba4f-00a0c91eedba&#125; </div><div class="line">mht.&#123;3050F3D9-98B5-11CF-BB82-00AA00BDCE0B&#125; </div><div class="line">mshta.&#123;3050f4d8-98B5-11CF-BB82-00AA00BDCE0B&#125; </div><div class="line">我的文档.&#123;450D8FBA-AD25-11D0-98A8-0800361B1103&#125; </div><div class="line">XML.&#123;48123bc4-99d9-11d1<span class="_">-a</span>6b3-00c04fd91555&#125; </div><div class="line">回收站(满).&#123;5ef4af3a<span class="_">-f</span>726-11d0-b8a2-00c04<span class="built_in">fc</span>309a4&#125; </div><div class="line">回收站.&#123;645FF040-5081-101B-9F08-00AA002F954E&#125; </div><div class="line">ftp_folder.&#123;63da6ec0-2e98-11cf-8d82-444553540000&#125; </div><div class="line">网络和拨号连接.&#123;7007ACC7-3202-11D1-AAD2-00805FC1270E&#125; </div><div class="line">写字板文档.&#123;73FDDC80-AEA9-101A-98A7-00AA00374959&#125; </div><div class="line">Temporary Offline Files Cleaner.&#123;750fdf0f-2a26-11d1<span class="_">-a</span>3ea-080036587f03&#125; </div><div class="line">用户和密码.&#123;7A9D77BD-5403-11d2-8785-2E0420524153&#125; </div><div class="line">Internet 临时文件.&#123;7BD29E00-76C1-11CF-9DD0-00A0C9034933&#125; </div><div class="line">已下载的程序文件的清除程序.&#123;8369AB20-56C9-11D0-94E8-00AA0059CE02&#125; </div><div class="line">公文包.&#123;85BBD920-42A0-1069-A2E4-08002B30309D&#125; </div><div class="line">ActiveX 高速缓存文件夹.&#123;88C6C381-2E85-11D0-94DE-444553540000&#125; </div><div class="line">mail.&#123;9E56BE60-C50F-11CF-9A2C-00A0C90A90CE&#125; </div><div class="line">历史记录.&#123;FF393560-C2A7-11CF-BFF4-444553540000&#125; </div><div class="line">目录.&#123;fe1290f0-cfbd-11cf<span class="_">-a</span>330-00aa00c16e65&#125; </div><div class="line">Internet Explorer.&#123;FBF23B42-E3F0-101B-8488-00AA003E56F8&#125; </div><div class="line">Snapshot File.&#123;FACB5ED2-7F99-11D0-ADE2-00A0C90DC8D9&#125; </div><div class="line">预订文件夹.&#123;F5175861-2688-11d0-9C5E-00AA00A45957&#125; </div><div class="line">MyDocs Drop Target.&#123;ECF03A32-103D-11d2-854D-006008059367&#125; </div><div class="line">Policy Package.&#123;ecabaebd-7f19-11d2-978E-0000f8757e2a&#125; </div><div class="line">搜索结果.&#123;e17d4<span class="built_in">fc</span>0-5564-11d1-83f2-00a0c90dc849&#125; </div><div class="line">添加网上邻居.&#123;D4480A50-BA28-11d1-8E75-00C04FA31A86&#125; </div><div class="line">Paint.&#123;D3E34B21-9D75-101A-8C3D-00AA001A1652&#125; </div><div class="line">管理工具.&#123;D20EA4E1-3957-11d2-A40B-0C5020524153&#125; </div><div class="line">字体.&#123;D20EA4E1-3957-11d2-A40B-0C5020524152&#125; </div><div class="line">Web Folders.&#123;BDEADF00-C265-11d0-BCED-00A0C90AB50F&#125; </div><div class="line">DocFind Command.&#123;B005E690-678D-11d1-B758-00A0C90564FE&#125; </div><div class="line">脱机文件夹.&#123;AFDB1F70-2A4C-11d2-9039-00C04F8EEB3E&#125;</div></pre></td></tr></table></figure>
 <div align="right">– 本人<a href="https://twitter.com/i_fucked_u/" target="_blank" rel="external">twitter</a>，欢迎交流.</div>
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2015/03/13/css的div垂直居中的方法，百分比div垂直居中/" rel="next" title="css的div垂直居中的方法，百分比div垂直居中">
-                <i class="fa fa-chevron-left"></i> css的div垂直居中的方法，百分比div垂直居中
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/12/18/git常用命令总结/" rel="prev" title="git常用命令总结">
-                git常用命令总结 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-      <div id="uyan_frame">
-				<!-- UY BEGIN -->
-				<div id="uyan_frame"></div>
-				<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2132622"></script>
-				<!-- UY END -->
-	  </div>
     
   </div>
+</article>
 
 
-        </div>
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持 填坑哥</div>
+        <ul class="theme.donation.items.length">
         
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="helloSmallCat" />
-          <p class="site-author-name" itemprop="name">helloSmallCat</p>
-           
-              <p class="site-description motion-element" itemprop="description">填坑到何年</p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">1</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
         
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
         
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
+        </ul>
       </div>
-    </main>
+    </div>
+  </div>
 
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">helloSmallCat</span>
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2015/03/13/css的div垂直居中的方法，百分比div垂直居中/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2015/12/18/git常用命令总结/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
 </div>
 
 
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">幕后老板 - Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  <span>
-  主题 -
-  <a class="theme-link" href="https://twitter.com/i_fucked_u">
-    helloSmallCat.Muse 
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
   </a>
-  </span>
-  <span><b><i class="fa fa-twitter" style="color:rgb(29, 161, 242);padding-top:3px"></i></b></span>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">Close</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/atom.xml"
+              rel="noopener noreferrer"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="CIRCLE"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
 </div>
-<script>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'forsigner';
+    
+    var disqus_url = 'http://breakor.github.io/2015/05/02/shangdimoshi/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//forsigner.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+    
 	
-</script>
-
-
-        
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
   </div>
 
   
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
   }
 </script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-    
-
-    
-      <!-- UY BEGIN -->
-      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2132622"></script>
-      <!-- UY END -->
-    
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>
