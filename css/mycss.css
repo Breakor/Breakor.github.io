@@ -1,0 +1,22 @@
+.highlight {
+	background-color: black!important;
+	box-shadow: 1px 2px 12px #000,0 0 1px #000, 0 0 1px #000;
+}
+td.code,td.gutter {
+	color: #fff!important;
+}
+a[href="/project/"] {
+	font-family: "楷体";
+	font-weight: bold;
+	color: #4d91d4!important;
+}
+a[href="/project/"]:hover {
+	color: #f00!important;
+}
+.slogan {
+	font-family: "Informal Roman";
+	font-weight: bold!important;
+}
+ul.text-center {
+	font-family: "Times New Roman";
+}
