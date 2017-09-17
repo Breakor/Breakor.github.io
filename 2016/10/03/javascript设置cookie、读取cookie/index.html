@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+
+
+  <html class="light page-post">
+
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>javascript设置cookie、读取cookie | 填坑到何月</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="forsigner,前端,设计,Hexo主题,前端开发,用户体验,设计,frontend,design,nodejs,JavaScript" />
+  
+
+  <meta name="description" content="JavaScript是运行在客户端的脚本，因此一般是不能够设置Session的，因为Session是运行在服务器端的。 而cookie是运行在客户端的，所以可以用JS来设置cookie. 假设有这样一种情况，在某个用例流程中，由A页面跳至B页面，若在A页面中采用JS用变量temp保存了某一变量的值，在B页面的时候，同样需要使用JS来引用temp的变量值，对于JS中的全局变量或者静态变量的生命周期">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript设置cookie、读取cookie">
+<meta property="og:url" content="http://breakor.github.io/2016/10/03/javascript设置cookie、读取cookie/index.html">
+<meta property="og:site_name" content="填坑到何月">
+<meta property="og:description" content="JavaScript是运行在客户端的脚本，因此一般是不能够设置Session的，因为Session是运行在服务器端的。 而cookie是运行在客户端的，所以可以用JS来设置cookie. 假设有这样一种情况，在某个用例流程中，由A页面跳至B页面，若在A页面中采用JS用变量temp保存了某一变量的值，在B页面的时候，同样需要使用JS来引用temp的变量值，对于JS中的全局变量或者静态变量的生命周期">
+<meta property="og:updated_time" content="2017-09-05T18:27:39.354Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript设置cookie、读取cookie">
+<meta name="twitter:description" content="JavaScript是运行在客户端的脚本，因此一般是不能够设置Session的，因为Session是运行在服务器端的。 而cookie是运行在客户端的，所以可以用JS来设置cookie. 假设有这样一种情况，在某个用例流程中，由A页面跳至B页面，若在A页面中采用JS用变量temp保存了某一变量的值，在B页面的时候，同样需要使用JS来引用temp的变量值，对于JS中的全局变量或者静态变量的生命周期">
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  <link href="/css/styles.css?v=c114cbe6" rel="stylesheet">
+
+
+  
+    <link rel="stylesheet" href="/css/mycss.css">
+  
+
+  
+
+  
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?57e94d016e201fba3603a8a2b0263af0";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+  
+  <script type="text/javascript">
+	(function(){
+	    var bp = document.createElement('script');
+	    var curProtocol = window.location.protocol.split(':')[0];
+	    if (curProtocol === 'https') {
+	        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+	    }
+	    else {
+	        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+	    }
+	    var s = document.getElementsByTagName("script")[0];
+	    s.parentNode.insertBefore(bp, s);
+	})();
+  </script>
+
+
+
+  
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  
+
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  
+</head>
+
+<body>
+
+
+  
+    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+  
+
+  <div class="post-header CENTER">
+   
+  <div class="toolbox">
+    <a class="toolbox-entry" href="/">
+      <span class="toolbox-entry-text">盒子</span>
+      <i class="icon-angle-down"></i>
+      <i class="icon-home"></i>
+    </a>
+    <ul class="list-toolbox">
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/archives/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            博客
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/category/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            分类
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/tag/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            标签
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/link/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            友链
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/about/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            关于
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/atom.xml"
+            rel="noopener noreferrer"
+            target="_blank"
+            >
+            RSS
+          </a>
+        </li>
+      
+        <li class="item-toolbox">
+          <a
+            class="ROUND_RECT"
+            href="/search/"
+            rel="noopener noreferrer"
+            target="_self"
+            >
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+
+</div>
+
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#JS设置cookie"><span class="toc-text">JS设置cookie:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS读取cookie"><span class="toc-text">JS读取cookie:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读取cookies"><span class="toc-text">读取cookies</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除cookies"><span class="toc-text">删除cookies</span></a></li></ol>
+  </div>
+
+
+
+<div class="content content-post CENTER">
+   <article id="post-javascript设置cookie、读取cookie" class="article article-type-post" itemprop="blogPost">
+  <header class="article-header">
+    <h1 class="post-title">javascript设置cookie、读取cookie</h1>
+
+    <div class="article-meta">
+      <span>
+        <i class="icon-calendar"></i>
+        <span>2016.10.03</span>
+      </span>
+
+      
+        <span class="article-author">
+          <i class="icon-user"></i>
+          <span>helloSmallCat</span>
+        </span>
+      
+
+      
+
+
+      
+        <span>
+          <i class="icon-comment"></i>
+          <a href="http://www.yahoo.com/2016/10/03/javascript设置cookie、读取cookie/#disqus_thread"></a>
+        </span>
+      
+
+      
+      <i class="fa fa-eye"></i> 
+        <span id="busuanzi_container_page_pv">
+           &nbsp热度 <span id="busuanzi_value_page_pv">
+           <i class="fa fa-spinner fa-spin"></i></span>℃
+        </span>
+      
+
+      
+      
+    </div>
+  </header>
+
+  <div class="article-content">
+    
+      <hr>
+<p>JavaScript是运行在客户端的脚本，因此一般是不能够设置Session的，因为Session是运行在服务器端的。</p>
+<p>而cookie是运行在客户端的，所以可以用JS来设置cookie.</p>
+<p>假设有这样一种情况，在某个用例流程中，由A页面跳至B页面，若在A页面中采用JS用变量temp保存了某一变量的值，在B页面的时候，同样需要使用JS来引用temp的变量值，对于JS中的全局变量或者静态变量的生命周期是有限的，当发生页面跳转或者页面关闭的时候，这些变量的值会重新载入，即没有达到保存的效果。解决这个问题的最好的方案是采用cookie来保存该变量的值，那么如何来设置和读取cookie呢？</p>
+<p>首先需要稍微了解一下cookie的结构，简单地说：cookie是以键值对的形式保存的，即key=value的格式。各个cookie之间一般是以“;”分隔。</p>
+<h3 id="JS设置cookie"><a href="#JS设置cookie" class="headerlink" title="JS设置cookie:"></a>JS设置cookie:</h3><p>假设在A页面中要保存变量username的值(“jack”)到cookie中,key值为name，则相应的JS代码为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.cookie=<span class="string">"name="</span>+username;</div></pre></td></tr></table></figure>
+<h3 id="JS读取cookie"><a href="#JS读取cookie" class="headerlink" title="JS读取cookie:"></a>JS读取cookie:</h3><p>假设cookie中存储的内容为：name=jack;password=123</p>
+<p>则在B页面中获取变量username的值的JS代码如下：</p>
+<div class="jb51code"><br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"> class=&quot;brush:js;&quot;&gt;var username=document.cookie.split(&quot;;&quot;)[0].split(&quot;=&quot;)[1];</div><div class="line">//JS操作cookies方法!</div><div class="line">//写cookies</div><div class="line">function setCookie(name,value)</div><div class="line">&#123;</div><div class="line">var Days = 30;</div><div class="line">var exp = new Date();</div><div class="line">exp.setTime(exp.getTime() + Days*24*60*60*1000);</div><div class="line">document.cookie = name + &quot;=&quot;+ escape (value) + &quot;;expires=&quot; + exp.toGMTString();</div><div class="line">&#125;</div></pre></td></tr></table></figure><br><br></div>
+
+<h3 id="读取cookies"><a href="#读取cookies" class="headerlink" title="读取cookies"></a>读取cookies</h3><div class="jb51code"><br><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCookie</span>(<span class="params">name</span>)</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">var</span> arr,reg=<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"(^| )"</span>+name+<span class="string">"=([^;]*)(;|$)"</span>);</div><div class="line"><span class="keyword">if</span>(arr=<span class="built_in">document</span>.cookie.match(reg))</div><div class="line"><span class="keyword">return</span> <span class="built_in">unescape</span>(arr[<span class="number">2</span>]);</div><div class="line"><span class="keyword">else</span></div><div class="line"><span class="keyword">return</span> <span class="literal">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure><br><br></div>
+
+<h3 id="删除cookies"><a href="#删除cookies" class="headerlink" title="删除cookies"></a>删除cookies</h3><div class="jb51code"><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">delCookie</span>(<span class="params">name</span>)</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">var</span> exp = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">exp.setTime(exp.getTime() - <span class="number">1</span>);</div><div class="line"><span class="keyword">var</span> cval=getCookie(name);</div><div class="line"><span class="keyword">if</span>(cval!=<span class="literal">null</span>)</div><div class="line"><span class="built_in">document</span>.cookie= name + <span class="string">"="</span>+cval+<span class="string">";expires="</span>+exp.toGMTString();</div><div class="line">&#125;</div><div class="line"><span class="comment">//使用示例</span></div><div class="line">setCookie(<span class="string">"name"</span>,<span class="string">"hayden"</span>);</div><div class="line">alert(getCookie(<span class="string">"name"</span>));</div><div class="line"><span class="comment">//如果需要设定自定义过期时间</span></div><div class="line"><span class="comment">//那么把上面的setCookie　函数换成下面两个函数就ok;</span></div><div class="line"><span class="comment">//程序代码</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setCookie</span>(<span class="params">name,value,time</span>)</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">var</span> strsec = getsec(time);</div><div class="line"><span class="keyword">var</span> exp = <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">exp.setTime(exp.getTime() + strsec*<span class="number">1</span>);</div><div class="line"><span class="built_in">document</span>.cookie = name + <span class="string">"="</span>+ <span class="built_in">escape</span> (value) + <span class="string">";expires="</span> + exp.toGMTString();</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getsec</span>(<span class="params">str</span>)</span></div><div class="line">&#123;</div><div class="line">alert(str);</div><div class="line"><span class="keyword">var</span> str1=str.substring(<span class="number">1</span>,str.length)*<span class="number">1</span>;</div><div class="line"><span class="keyword">var</span> str2=str.substring(<span class="number">0</span>,<span class="number">1</span>);</div><div class="line"><span class="keyword">if</span> (str2==<span class="string">"s"</span>)</div><div class="line">&#123;</div><div class="line"><span class="keyword">return</span> str1*<span class="number">1000</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span> (str2==<span class="string">"h"</span>)</div><div class="line">&#123;</div><div class="line"><span class="keyword">return</span> str1*<span class="number">60</span>*<span class="number">60</span>*<span class="number">1000</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span> (str2==<span class="string">"d"</span>)</div><div class="line">&#123;</div><div class="line"><span class="keyword">return</span> str1*<span class="number">24</span>*<span class="number">60</span>*<span class="number">60</span>*<span class="number">1000</span>;</div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">//这是有设定过期时间的使用示例：</span></div><div class="line"><span class="comment">//s20是代表20秒</span></div><div class="line"><span class="comment">//h是指小时，如12小时则是：h12</span></div><div class="line"><span class="comment">//d是天数，30天则：d30</span></div><div class="line">setCookie(<span class="string">"name"</span>,<span class="string">"hayden"</span>,<span class="string">"s20"</span>);</div></pre></td></tr></table></figure><br><br></div>
+
+<p>以上所述就是本文的全部内容了，希望大家能够喜欢。</p>
+<p></p>
+
+    
+  </div>
+</article>
+
+
+   
+  <div class="text-center donation">
+    <div class="inner-donation">
+      <span class="btn-donation">支持一下</span>
+      <div class="donation-body">
+        <div class="tip text-center">扫一扫，支持 填坑哥</div>
+        <ul class="theme.donation.items.length">
+        
+          <li class="item">
+            <img src="/images/qr-wechat.png" alt="">
+          </li>
+        
+          <li class="item">
+            <img src="/images/qr-alipay.png" alt="">
+          </li>
+        
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+   
+  <div class="box-prev-next clearfix">
+    <a class="show pull-left" href="/2016/09/22/工作关键api/">
+        <i class="icon icon-angle-left"></i>
+    </a>
+    <a class="show pull-right" href="/2016/10/10/javascript;与javascriptvoid(0)使用介绍/">
+        <i class="icon icon-angle-right"></i>
+    </a>
+  </div>
+
+
+
+
+</div>
+
+
+  <a id="backTop" class="back-top">
+    <i class="icon-angle-up"></i>
+  </a>
+
+
+
+
+  <div class="modal" id="modal">
+  <span id="cover" class="cover hide"></span>
+  <div id="modal-dialog" class="modal-dialog hide-dialog">
+    <div class="modal-header">
+      <span id="close" class="btn-close">关闭</span>
+    </div>
+    <hr>
+    <div class="modal-body">
+      <ul class="list-toolbox">
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/archives/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              博客
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/category/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              分类
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/tag/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              标签
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/link/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              友链
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/about/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              关于
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/atom.xml"
+              rel="noopener noreferrer"
+              target="_blank"
+              >
+              RSS
+            </a>
+          </li>
+        
+          <li class="item-toolbox">
+            <a
+              class="ROUND_RECT"
+              href="/search/"
+              rel="noopener noreferrer"
+              target="_self"
+              >
+              搜索
+            </a>
+          </li>
+        
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+
+
+  
+      <div class="fexo-comments comments-post">
+    
+  <section class="disqus-comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+  </section>
+
+  <script>
+    var disqus_shortname = 'bug';
+    
+    var disqus_url = 'http://breakor.github.io/2016/10/03/javascript设置cookie、读取cookie/';
+    
+    (function(){
+      var dsq = document.createElement('script');
+      dsq.type = 'text/javascript';
+      dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+
+  <script id="dsq-count-scr" src="//bug.disqus.com/count.js" async></script>
+
+
+
+    
+
+
+
+
+    
+
+    
+	
+  </div>
+
+  
+
+  <script type="text/javascript">
+  function loadScript(url, callback) {
+    var script = document.createElement('script')
+    script.type = 'text/javascript';
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function() {
+        if (script.readyState == 'loaded' ||
+          script.readyState == 'complete') {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function() {
+        callback();
+      };
+    }
+
+    script.src = url;
+    document.getElementsByTagName('head')[0].appendChild(script);
+  }
+
+  window.onload = function() {
+    loadScript('/js/bundle.js?235683', function() {
+      // load success
+    });
+  }
+</script>
+
+</body>
+</html>
